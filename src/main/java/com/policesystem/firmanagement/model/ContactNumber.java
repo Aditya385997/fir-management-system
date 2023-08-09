@@ -14,6 +14,10 @@ public class ContactNumber {
     private String ph_no;
 
     @ManyToOne
+    @JoinColumn(name = "accuse_id")
+    private AccusedPerson accusedPerson;
+
+    @ManyToOne
     @JoinColumn(name = "police_id",nullable = false)
     private PoliceOfficer policeOfficer;
 

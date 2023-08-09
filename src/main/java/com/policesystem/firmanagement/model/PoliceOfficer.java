@@ -27,6 +27,9 @@ public class PoliceOfficer
     @JoinColumn(name = "police_station_id")
     private PoliceStation policeStation;
 
+    @ManyToMany(mappedBy = "policeOfficers",cascade = CascadeType.ALL)
+    private List<Fir> firs;
+
     @OneToMany(mappedBy = "policeOfficer",cascade = CascadeType.ALL)
     private List<ContactNumber> contactNumberList ;
 

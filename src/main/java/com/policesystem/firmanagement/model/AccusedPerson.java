@@ -5,30 +5,41 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "criminal")
+@Table(name = "accused_people")
 public class AccusedPerson {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "criminal_id")
+    @Column(name = "accused_people_id")
     private Long id;
 
+    @Column(name = "accused_people_name",nullable = false)
     private String acc_name;
 
+    @Column(name = "accused_people_age",nullable = false)
     private String acc_age;
 
+    @OneToMany(mappedBy = "accusedPerson",cascade = CascadeType.ALL)
+    private List<ContactNumber> contactNumbers;
     @ManyToMany(mappedBy = "accusedPeoples",cascade = CascadeType.ALL)
     private List<Fir> firs;
 
     public AccusedPerson() {
     }
 
+    public AccusedPerson(String acc_name, String acc_age, List<ContactNumber> contactNumbers) {
+        this.acc_name = acc_name;
+        this.acc_age = acc_age;
+        this.contactNumbers = contactNumbers;
+    }
     public AccusedPerson(Long id, String acc_name, String acc_age, List<Fir> firs) {
         this.id = id;
         this.acc_name = acc_name;
         this.acc_age = acc_age;
         this.firs = firs;
     }
+
+
 
     public Long getId() {
         return id;

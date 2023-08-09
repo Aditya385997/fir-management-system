@@ -18,12 +18,17 @@ public class Fir {
     @JoinColumn(name = "police_station_id",nullable = false)
     private PoliceStation police_station;
 
+    @ManyToMany
+    @JoinTable(name = "police_officers_id",joinColumns = {@JoinColumn(name = "fir_id")},inverseJoinColumns = {@JoinColumn(name = "police_officer_id")})
+    private List<PoliceOfficer> policeOfficers;
+
+    @Column(name = "crime_detail",nullable = false)
     private String crimeDetails;
     @ManyToMany
-    @JoinTable(name = "fir_accused_list")
+    @JoinTable(name = "fir_accused_list",joinColumns = {@JoinColumn(name = "accused_people_id")},inverseJoinColumns = {@JoinColumn(name = "fir_id")})
     private List<AccusedPerson> accusedPeoples;
 
-    public Fir() {
+    public Fir(){
     }
 
     public Fir(Long id, String issue_person, PoliceStation police_station, String crimeDetails, List<AccusedPerson> accusedPeoples) {
