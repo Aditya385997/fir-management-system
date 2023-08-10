@@ -6,7 +6,10 @@ import com.policesystem.firmanagement.response.PolicesFromStationId;
 
 import java.util.List;
 
-public interface PoliceOfficerService{
+public interface PoliceOfficerService {
     PoliceOfficer insertPoliceOfficer(PoliceOfficerReqBody policeOfficerReqBody);
+
     List<PolicesFromStationId> getAllOfficer(Long id);
+
+    public PoliceOfficer getPoliceById(Long id);
 }
