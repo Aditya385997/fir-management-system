@@ -7,6 +7,11 @@ import java.util.List;
 @Entity
 @Table(name = "police_fir")
 public class Fir {
+
+    /*
+    * In Many To Many First We have To Save the Object and than add to the list and One Class Will Control the Mapping And Create the Join table;
+    * */
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "fir_id")
@@ -29,6 +34,15 @@ public class Fir {
     private List<AccusedPerson> accusedPeoples;
 
     public Fir(){
+    }
+
+    public Fir(Long id, String issue_person, PoliceStation police_station, List<PoliceOfficer> policeOfficers, String crimeDetails, List<AccusedPerson> accusedPeoples) {
+        this.id = id;
+        this.issue_person = issue_person;
+        this.police_station = police_station;
+        this.policeOfficers = policeOfficers;
+        this.crimeDetails = crimeDetails;
+        this.accusedPeoples = accusedPeoples;
     }
 
     public Fir(Long id, String issue_person, PoliceStation police_station, String crimeDetails, List<AccusedPerson> accusedPeoples) {
@@ -69,6 +83,14 @@ public class Fir {
 
     public void setCrimeDetails(String crimeDetails) {
         this.crimeDetails = crimeDetails;
+    }
+
+    public List<PoliceOfficer> getPoliceOfficers() {
+        return policeOfficers;
+    }
+
+    public void setPoliceOfficers(List<PoliceOfficer> policeOfficers) {
+        this.policeOfficers = policeOfficers;
     }
 
     public List<AccusedPerson> getAccusedPeoples() {

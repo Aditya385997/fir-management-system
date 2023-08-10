@@ -12,13 +12,25 @@ import org.springframework.stereotype.Service;
 public class PoliceStationServiceImpl implements PoliceStationService {
     @Autowired
     private PoliceStationRepository policeStationRepository;
+
     @Override
     public void insertPoliceStation(PoliceStation policeStation) {
         try {
             policeStationRepository.save(policeStation);
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public PoliceStation getPoliceStationName(Long id) {
+        try {
+            return policeStationRepository.getReferenceById(id);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
+

@@ -27,6 +27,7 @@ public class AccusedPerson {
     public AccusedPerson() {
     }
 
+
     public AccusedPerson(String acc_name, String acc_age, List<ContactNumber> contactNumbers) {
         this.acc_name = acc_name;
         this.acc_age = acc_age;
@@ -71,6 +72,15 @@ public class AccusedPerson {
 
     public void setFirs(List<Fir> firs) {
         this.firs = firs;
+    }
+
+
+    public List<ContactNumber> getContactNumbers() {
+        return contactNumbers;
+    }
+
+    public void setContactNumbers(List<ContactNumber> contactNumbers) {
+        this.contactNumbers = contactNumbers;
     }
 
     @Override

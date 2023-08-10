@@ -87,5 +87,17 @@ public class PoliceOfficerServiceImpl implements PoliceOfficerService {
 
     }
 
+    @Override
+    public PoliceOfficer getPoliceById(Long id) {
+        try
+        {
+            return policeman.getReferenceById(id);
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 
 }

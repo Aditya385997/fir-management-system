@@ -18,10 +18,17 @@ public class ContactNumber {
     private AccusedPerson accusedPerson;
 
     @ManyToOne
-    @JoinColumn(name = "police_id",nullable = false)
+    @JoinColumn(name = "police_id")
     private PoliceOfficer policeOfficer;
 
     public ContactNumber() {
+    }
+
+    public ContactNumber(Long id, String ph_no, AccusedPerson accusedPerson, PoliceOfficer policeOfficer) {
+        this.id = id;
+        this.ph_no = ph_no;
+        this.accusedPerson = accusedPerson;
+        this.policeOfficer = policeOfficer;
     }
 
     public ContactNumber(Long id, String ph_no, PoliceOfficer policeOfficer) {
@@ -59,11 +66,22 @@ public class ContactNumber {
         this.policeOfficer = policeOfficer;
     }
 
+    public AccusedPerson getAccusedPerson() {
+        return accusedPerson;
+    }
+
+    public void setAccusedPerson(AccusedPerson accusedPerson) {
+        this.accusedPerson = accusedPerson;
+    }
+
+
     @Override
     public String toString() {
         return "ContactNumber{" +
                 "id=" + id +
                 ", ph_no='" + ph_no + '\'' +
+                ", accusedPerson=" + accusedPerson +
+                ", policeOfficer=" + policeOfficer +
                 '}';
     }
 }

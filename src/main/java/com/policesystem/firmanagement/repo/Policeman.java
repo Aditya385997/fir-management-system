@@ -20,4 +20,9 @@ public interface Policeman extends JpaRepository<PoliceOfficer,Long> {
     @Query("Select NEW com.policesystem.firmanagement.response.PolicesFromStationId(po.name,po.age,ps.station_name,d.role) FROM PoliceOfficer as po INNER JOIN po.policeStation as ps INNER JOIN po.designation as d WHERE ps.id = :id")
     List<PolicesFromStationId> getAllOfficers(@Param("id") Long  id);
 
+
+
+    @Query("Select po From PoliceOfficer as po WHERE po.policeStation = :id")
+    List<PoliceOfficer> getPoliceByStationId(@Param("id") Long id);
+
 }
