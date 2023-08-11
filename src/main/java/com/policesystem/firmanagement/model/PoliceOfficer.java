@@ -33,11 +33,25 @@ public class PoliceOfficer
     @OneToMany(mappedBy = "policeOfficer",cascade = CascadeType.ALL)
     private List<ContactNumber> contactNumberList ;
 
+    @OneToMany(mappedBy = "policeOfficer",cascade = CascadeType.ALL)
+    private List<Address> addresses;
+
 
     public PoliceOfficer() {
     }
 
-    public PoliceOfficer(Long id, String name, int age, Designation designation, List<ContactNumber> contactNumberList,PoliceStation policeStation) {
+    public PoliceOfficer(Long id, String name, int age, Designation designation, PoliceStation policeStation, List<Fir> firs, List<ContactNumber> contactNumberList, List<Address> addresses) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.designation = designation;
+        this.policeStation = policeStation;
+        this.firs = firs;
+        this.contactNumberList = contactNumberList;
+        this.addresses = addresses;
+    }
+
+    public PoliceOfficer(Long id, String name, int age, Designation designation, List<ContactNumber> contactNumberList, PoliceStation policeStation) {
         this.id = id;
         this.name = name;
         this.age = age;
@@ -61,6 +75,21 @@ public class PoliceOfficer
     }
 
 
+    public List<Fir> getFirs() {
+        return firs;
+    }
+
+    public void setFirs(List<Fir> firs) {
+        this.firs = firs;
+    }
+
+    public List<Address> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
+    }
 
     public Long getId() {
         return id;
@@ -118,7 +147,6 @@ public class PoliceOfficer
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", age=" + age +
-                ", contactNumberList=" + contactNumberList +
                 ", Designation = "+designation+
                 '}';
     }
@@ -129,7 +157,7 @@ A policeOfficer can have one designation and one designation belongs to one Poli
 A PoliceOfficer can have Many Numbers and Many Number can belong to one policeOfficer
 
 A Police station have many police Officer but A police Officer can have only one police station
-
+          ", firs=" + firs +
 
 A Police Officer Can Register Many Fir (But Belongs to one Police Station)and Many FIR Are Register By One policeOfficer (Belongs to One police station)_
 

@@ -80,8 +80,6 @@ public class ContactNumber {
         return "ContactNumber{" +
                 "id=" + id +
                 ", ph_no='" + ph_no + '\'' +
-                ", accusedPerson=" + accusedPerson +
-                ", policeOfficer=" + policeOfficer +
                 '}';
     }
 }

@@ -24,9 +24,20 @@ public class AccusedPerson {
     @ManyToMany(mappedBy = "accusedPeoples",cascade = CascadeType.ALL)
     private List<Fir> firs;
 
+    @OneToMany(mappedBy = "accusedPerson",cascade = CascadeType.ALL)
+    private List<AccusedPerson> accusedPeoples;
+
     public AccusedPerson() {
     }
 
+    public AccusedPerson(Long id, String acc_name, String acc_age, List<ContactNumber> contactNumbers, List<Fir> firs, List<AccusedPerson> accusedPeoples) {
+        this.id = id;
+        this.acc_name = acc_name;
+        this.acc_age = acc_age;
+        this.contactNumbers = contactNumbers;
+        this.firs = firs;
+        this.accusedPeoples = accusedPeoples;
+    }
 
     public AccusedPerson(String acc_name, String acc_age, List<ContactNumber> contactNumbers) {
         this.acc_name = acc_name;
@@ -41,6 +52,13 @@ public class AccusedPerson {
     }
 
 
+    public List<AccusedPerson> getAccusedPeoples() {
+        return accusedPeoples;
+    }
+
+    public void setAccusedPeoples(List<AccusedPerson> accusedPeoples) {
+        this.accusedPeoples = accusedPeoples;
+    }
 
     public Long getId() {
         return id;
@@ -89,7 +107,6 @@ public class AccusedPerson {
                 "id=" + id +
                 ", acc_name='" + acc_name + '\'' +
                 ", acc_age='" + acc_age + '\'' +
-                ", firs=" + firs +
                 '}';
     }
 }

@@ -10,6 +10,13 @@ public class Fir {
 
     /*
     * In Many To Many First We have To Save the Object and than add to the list and One Class Will Control the Mapping And Create the Join table;
+    *
+    * Always inserting the value using cascade follow the table in which the data is going
+    * example in this case
+    *
+    * First i will create List of accused and police officer Now
+    * secong i will add contactNumber list to accused person
+    * Than i will add this to
     * */
 
     @Id
@@ -19,16 +26,21 @@ public class Fir {
     @Column(name = "issued_person")
     private String issue_person;
 
+    @Column(name = "crime_detail",nullable = false)
+    private String crimeDetails;
+
+
+
     @ManyToOne
     @JoinColumn(name = "police_station_id",nullable = false)
     private PoliceStation police_station;
+
 
     @ManyToMany
     @JoinTable(name = "police_officers_id",joinColumns = {@JoinColumn(name = "fir_id")},inverseJoinColumns = {@JoinColumn(name = "police_officer_id")})
     private List<PoliceOfficer> policeOfficers;
 
-    @Column(name = "crime_detail",nullable = false)
-    private String crimeDetails;
+
     @ManyToMany
     @JoinTable(name = "fir_accused_list",joinColumns = {@JoinColumn(name = "accused_people_id")},inverseJoinColumns = {@JoinColumn(name = "fir_id")})
     private List<AccusedPerson> accusedPeoples;
