@@ -27,9 +27,10 @@ public class PoliceOfficerControllerImpl implements PoliceOfficerController {
     @Override
     public ResponseEntity<PoliceOfficer> insertOfficer(@RequestBody PoliceOfficerReqBody policeOfficerReqBody) {
         try{
+            System.out.println(policeOfficerReqBody);
             PoliceOfficer policeOfficer = policeOfficerService.insertPoliceOfficer(policeOfficerReqBody);
             System.out.println(policeOfficer);
-            return new ResponseEntity<PoliceOfficer>(policeOfficer,HttpStatusCode.valueOf(ResponseEntityConst.SUCESS));
+            return new ResponseEntity<>(policeOfficer, HttpStatusCode.valueOf(ResponseEntityConst.SUCESS));
         }
         catch (Exception e)
         {

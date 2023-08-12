@@ -1,5 +1,6 @@
 package com.policesystem.firmanagement.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -20,17 +21,20 @@ public class AccusedPerson {
     private String acc_age;
 
     @OneToMany(mappedBy = "accusedPerson",cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<ContactNumber> contactNumbers;
     @ManyToMany(mappedBy = "accusedPeoples",cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Fir> firs;
 
     @OneToMany(mappedBy = "accusedPerson",cascade = CascadeType.ALL)
-    private List<AccusedPerson> accusedPeoples;
+    @JsonIgnore
+    private List<Address> accusedPeoples;
 
     public AccusedPerson() {
     }
 
-    public AccusedPerson(Long id, String acc_name, String acc_age, List<ContactNumber> contactNumbers, List<Fir> firs, List<AccusedPerson> accusedPeoples) {
+    public AccusedPerson(Long id, String acc_name, String acc_age, List<ContactNumber> contactNumbers, List<Fir> firs, List<Address> accusedPeoples) {
         this.id = id;
         this.acc_name = acc_name;
         this.acc_age = acc_age;
@@ -52,11 +56,11 @@ public class AccusedPerson {
     }
 
 
-    public List<AccusedPerson> getAccusedPeoples() {
+    public List<Address> getAccusedPeoples() {
         return accusedPeoples;
     }
 
-    public void setAccusedPeoples(List<AccusedPerson> accusedPeoples) {
+    public void setAccusedPeoples(List<Address> accusedPeoples) {
         this.accusedPeoples = accusedPeoples;
     }
 

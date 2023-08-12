@@ -3,7 +3,7 @@ package com.policesystem.firmanagement.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "police_contacts")
+@Table(name = "contacts")
 public class ContactNumber {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

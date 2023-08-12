@@ -64,9 +64,7 @@ public class FirServiceImpl implements FirService{
     {
         try
         {
-            List<Fir>firs = firDetails.getFirsBySt_id(id);
-            System.out.println(firs);
-            return firs;
+            return firDetails.getFirsBySt_id(id);
         }catch (Exception e)
         {
             e.printStackTrace();
@@ -80,32 +78,45 @@ public class FirServiceImpl implements FirService{
 
                 List<AccusedPerson> accusedPeoples = new ArrayList<>();
                 List<PoliceOfficer> policeOfficers = new ArrayList<>();
-                List<ContactNumber> accused_contacts = new ArrayList<>();
+
 
                 policeOfficers.add(policeOfficer);
 
                 for(AccusedPerson accusedPerson : firReqBody.getAccusedPeople())
                 {
+                    List<ContactNumber> accused_contacts = new ArrayList<>();
+                    List<Address> addresses_accused = new ArrayList<>();
 
-                    List<ContactNumber> contactNumbers;
                     AccusedPerson accusedPerson1 = new AccusedPerson();
                     accusedPerson1.setAcc_name(accusedPerson.getAcc_name());
                     accusedPerson1.setAcc_age(accusedPerson.getAcc_age());
                     //This is the Manual Way Where Cascading is not used
-                    accusedPersonService.insertPerson(accusedPerson1);
-                    contactNumbers = accusedPerson.getContactNumbers();
-                    for(ContactNumber contactNumber:contactNumbers)
+//                    accusedPersonService.insertPerson(accusedPerson1);
+
+                    for(Address address: accusedPerson.getAccusedPeoples())
+                    {
+                        Address address1 = new Address();
+                        address1.setCity(address.getCity());
+                        address1.setState(address.getState());
+                        address1.setCountry(address.getCountry());
+                        address1.setFullAddress(address.getFullAddress());
+                        address1.setPostalCode(address.getPostalCode());
+                        address1.setAccusedPerson(accusedPerson1);
+                        addresses_accused.add(address1);
+                    }
+                    for(ContactNumber contactNumber:accusedPerson.getContactNumbers())
                     {
                         ContactNumber contactNumber1 = new ContactNumber();
                         contactNumber1.setPh_no(contactNumber.getPh_no());
                         contactNumber1.setAccusedPerson(accusedPerson1);
                         accused_contacts.add(contactNumber1);
                     }
+                    accusedPerson1.setAccusedPeoples(addresses_accused);
                     accusedPerson1.setContactNumbers(accused_contacts);
                     accusedPeoples.add(accusedPerson1);
                 }
 
-                //If we Set All the Attributes As per the class the data Will Automatically stored in different Tables with the help of cascading
+                //If we Set All the Attributes As per the class data(attributes/properties) Will Automatically map tables stored in different Tables with the help of cascading
                 Fir fir1 = new Fir();
                 fir1.setCrimeDetails(firReqBody.getCriminalDetail());
                 fir1.setIssue_person(firReqBody.getIssuedPerson());

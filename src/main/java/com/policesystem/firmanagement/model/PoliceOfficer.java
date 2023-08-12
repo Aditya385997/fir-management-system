@@ -1,5 +1,6 @@
 package com.policesystem.firmanagement.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
@@ -25,15 +26,19 @@ public class PoliceOfficer
 
     @ManyToOne
     @JoinColumn(name = "police_station_id")
+    @JsonIgnore
     private PoliceStation policeStation;
 
     @ManyToMany(mappedBy = "policeOfficers",cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Fir> firs;
 
     @OneToMany(mappedBy = "policeOfficer",cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<ContactNumber> contactNumberList ;
 
     @OneToMany(mappedBy = "policeOfficer",cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Address> addresses;
 
 

@@ -1,5 +1,6 @@
 package com.policesystem.firmanagement.payload;
 
+import com.policesystem.firmanagement.model.Address;
 import com.policesystem.firmanagement.model.ContactNumber;
 import com.policesystem.firmanagement.model.Designation;
 
@@ -16,10 +17,21 @@ public class PoliceOfficerReqBody {
 
     private List<ContactNumber>req_contactNumbers;
 
+    private List<Address> addresses;
+
     public PoliceOfficerReqBody() {
     }
 
-    public PoliceOfficerReqBody(String req_name, int req_age, List<ContactNumber> req_contactNumbers,String designation,String req_station_id) {
+    public PoliceOfficerReqBody(String req_name, int req_age, String designation, String req_station_id, List<ContactNumber> req_contactNumbers, List<Address> addresses) {
+        this.req_name = req_name;
+        this.req_age = req_age;
+        this.designation = designation;
+        this.req_station_id = req_station_id;
+        this.req_contactNumbers = req_contactNumbers;
+        this.addresses = addresses;
+    }
+
+    public PoliceOfficerReqBody(String req_name, int req_age, List<ContactNumber> req_contactNumbers, String designation, String req_station_id) {
         this.req_name = req_name;
         this.req_age = req_age;
         this.req_contactNumbers = req_contactNumbers;
@@ -27,6 +39,13 @@ public class PoliceOfficerReqBody {
         this.req_station_id = req_station_id;
     }
 
+    public List<Address> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
+    }
 
     public String getReq_name() {
         return req_name;

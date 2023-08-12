@@ -1,5 +1,7 @@
 package com.policesystem.firmanagement.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -7,6 +9,9 @@ import java.util.List;
 @Entity
 @Table(name = "police_fir")
 public class Fir {
+    /*
+    * Whenever there is serializing error use Json Ignore annotation on List property
+    * */
 
     /*
     * In Many To Many First We have To Save the Object and than add to the list and One Class Will Control the Mapping And Create the Join table;
@@ -32,16 +37,19 @@ public class Fir {
 
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "police_station_id",nullable = false)
     private PoliceStation police_station;
 
 
     @ManyToMany
+    @JsonIgnore
     @JoinTable(name = "police_officers_id",joinColumns = {@JoinColumn(name = "fir_id")},inverseJoinColumns = {@JoinColumn(name = "police_officer_id")})
     private List<PoliceOfficer> policeOfficers;
 
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JsonIgnore
     @JoinTable(name = "fir_accused_list",joinColumns = {@JoinColumn(name = "accused_people_id")},inverseJoinColumns = {@JoinColumn(name = "fir_id")})
     private List<AccusedPerson> accusedPeoples;
 
@@ -120,7 +128,7 @@ public class Fir {
                 ", issue_person='" + issue_person + '\'' +
                 ", police_station=" + police_station +
                 ", crimeDetails='" + crimeDetails + '\'' +
-                ", accusedPeoples=" + accusedPeoples +
+          /*      ", accusedPeoples=" + accusedPeoples +*/
                 '}';
     }
 }

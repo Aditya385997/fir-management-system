@@ -30,6 +30,9 @@ public class Address {
     @JoinColumn(name="accused_pid")
     private AccusedPerson accusedPerson;
 
+    @OneToOne(mappedBy = "address",cascade = CascadeType.ALL)
+    private PoliceStation policeStation;
+
     public Address() {
     }
 
@@ -42,5 +45,89 @@ public class Address {
         this.city = city;
         this.policeOfficer = policeOfficer;
         this.accusedPerson = accusedPerson;
+    }
+
+    public PoliceStation getPoliceStation() {
+        return policeStation;
+    }
+
+    public void setPoliceStation(PoliceStation policeStation) {
+        this.policeStation = policeStation;
+    }
+
+    public Long getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId(Long addressId) {
+        this.addressId = addressId;
+    }
+
+    public String getFullAddress() {
+        return fullAddress;
+    }
+
+    public void setFullAddress(String fullAddress) {
+        this.fullAddress = fullAddress;
+    }
+
+    public int getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(int postalCode) {
+        this.postalCode = postalCode;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public PoliceOfficer getPoliceOfficer() {
+        return policeOfficer;
+    }
+
+    public void setPoliceOfficer(PoliceOfficer policeOfficer) {
+        this.policeOfficer = policeOfficer;
+    }
+
+    public AccusedPerson getAccusedPerson() {
+        return accusedPerson;
+    }
+
+    public void setAccusedPerson(AccusedPerson accusedPerson) {
+        this.accusedPerson = accusedPerson;
+    }
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "addressId=" + addressId +
+                ", fullAddress='" + fullAddress + '\'' +
+                ", postalCode=" + postalCode +
+                ", country='" + country + '\'' +
+                ", state='" + state + '\'' +
+                ", city='" + city + '\'' +
+                '}';
     }
 }

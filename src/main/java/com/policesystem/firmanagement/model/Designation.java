@@ -1,5 +1,6 @@
 package com.policesystem.firmanagement.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class Designation {
 
     @OneToMany(mappedBy = "designation",cascade = CascadeType.ALL)
     @Transient
+    @JsonIgnore
     private List<PoliceOfficer> policeOfficers;
 
     @Column(name = "designation_role",nullable = false)

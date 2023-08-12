@@ -18,8 +18,13 @@ import java.util.List;
 @RestController
 public class FirControllerImpl implements FirController {
 
+    private final FirService firService;
+
     @Autowired
-    private FirService firService;
+    public FirControllerImpl(FirService firService)
+    {
+        this.firService = firService;
+    }
 
     /*
     * Always Remember While Data Entering to databas using hibernate We Have To Set All The attributes of class as it is
@@ -30,6 +35,7 @@ public class FirControllerImpl implements FirController {
         try{
 
             Fir fir1 = firService.insertComplaint(firReqBody);
+
             return new ResponseEntity<Fir>(fir1,HttpStatusCode.valueOf(ResponseEntityConst.SUCESS));
         }catch (Exception e)
         {
@@ -42,9 +48,8 @@ public class FirControllerImpl implements FirController {
     public ResponseEntity<List<Fir>> getFirByPoliceStationId(@PathVariable Long id) {
         try
         {
-            System.out.println(id);
             List<Fir> firs = firService.getFirsByStation_id(id);
-            return new ResponseEntity<List<Fir>>(firs,HttpStatus.OK);
+            return new ResponseEntity<List<Fir>>(firs, HttpStatus.OK);
         }catch (Exception e)
         {
             e.printStackTrace();
