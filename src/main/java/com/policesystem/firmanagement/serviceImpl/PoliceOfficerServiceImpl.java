@@ -1,8 +1,5 @@
 package com.policesystem.firmanagement.serviceImpl;
-import com.policesystem.firmanagement.model.ContactNumber;
-import com.policesystem.firmanagement.model.Designation;
-import com.policesystem.firmanagement.model.PoliceOfficer;
-import com.policesystem.firmanagement.model.PoliceStation;
+import com.policesystem.firmanagement.model.*;
 import com.policesystem.firmanagement.payload.PoliceOfficerReqBody;
 import com.policesystem.firmanagement.repo.PoliceStationRepository;
 import com.policesystem.firmanagement.repo.Policeman;
@@ -52,6 +49,7 @@ public class PoliceOfficerServiceImpl implements PoliceOfficerService {
             Designation designation = post.getReferenceById(id);
             policeOfficer.setDesignation(designation);
             List<ContactNumber> contacts = new ArrayList<>();
+            List<Address> police_officer_addresses = new ArrayList<>();
 
             for(ContactNumber contactNumber : policeOfficerReqBody.getReq_contactNumbers())
             {
@@ -60,8 +58,19 @@ public class PoliceOfficerServiceImpl implements PoliceOfficerService {
                 contactNumber1.setPoliceOfficer(policeOfficer);
                 contacts.add(contactNumber1);
             }
+            for(Address address : policeOfficerReqBody.getAddresses())
+            {
+                Address address1 = new Address();
+                address1.setCity(address.getCity());
+                address1.setFullAddress(address.getFullAddress());
+                address1.setCountry(address.getCountry());
+                address1.setPoliceOfficer(policeOfficer);
+                address1.setState(address.getState());
+                address1.setPostalCode(address.getPostalCode());
+                police_officer_addresses.add(address1);
+            }
             policeOfficer.setContactNumberList(contacts);
-
+            policeOfficer.setAddresses(police_officer_addresses);
 
             policeman.save(policeOfficer);
             return policeOfficer;

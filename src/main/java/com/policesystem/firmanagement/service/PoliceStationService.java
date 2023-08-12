@@ -1,8 +1,9 @@
 package com.policesystem.firmanagement.service;
 
 import com.policesystem.firmanagement.model.PoliceStation;
+import com.policesystem.firmanagement.payload.PoliceStationReqBody;
 
 public interface PoliceStationService {
-    void insertPoliceStation(PoliceStation policeStation);
+    PoliceStation insertPoliceStation(PoliceStationReqBody policeStationReqBody);
     PoliceStation getPoliceStationName(Long id);
 }

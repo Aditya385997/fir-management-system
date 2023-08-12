@@ -22,18 +22,47 @@ public class PoliceStation {
     @OneToMany(mappedBy = "police_station",cascade = CascadeType.ALL)
     private List<Fir>fir_s;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "station_aid",nullable = false)
+    private Address address;
+
     public PoliceStation() {
     }
 
-    public PoliceStation(int id, String station_name) {
+    public PoliceStation(int id, String station_name,Address address) {
         this.id = id;
         this.station_name = station_name;
+        this.address = address;
+    }
+
+    public PoliceStation(int id, String station_name, List<PoliceOfficer> policeOfficers, List<Fir> fir_s, Address address) {
+        this.id = id;
+        this.station_name = station_name;
+        this.policeOfficers = policeOfficers;
+        this.fir_s = fir_s;
+        this.address = address;
     }
 
     public PoliceStation(int id, String station_name, List<PoliceOfficer> policeOfficers) {
         this.id = id;
         this.station_name = station_name;
         this.policeOfficers = policeOfficers;
+    }
+
+    public List<Fir> getFir_s() {
+        return fir_s;
+    }
+
+    public void setFir_s(List<Fir> fir_s) {
+        this.fir_s = fir_s;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public int getId() {
